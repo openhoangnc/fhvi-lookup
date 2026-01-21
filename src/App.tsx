@@ -9,7 +9,7 @@ import {
   calculateDistance,
 } from "./utils/filter";
 import { t, translateCategory, type Language } from "./utils/translations";
-import { Search, X, Info, Sun, Moon, RotateCcw } from "lucide-react";
+import { Search, X, Info, Sun, Moon, RotateCcw, Github } from "lucide-react";
 import "./App.css";
 
 const App: React.FC = () => {
@@ -295,6 +295,15 @@ const App: React.FC = () => {
             <button className="icon-button" onClick={toggleTheme}>
               {theme === "light" ? <Moon size={22} /> : <Sun size={22} />}
             </button>
+            <a
+              href="https://github.com/openhoangnc/fhvi-lookup"
+              target="_blank"
+              rel="noreferrer"
+              className="icon-button"
+              title={t("openSource", language)}
+            >
+              <Github size={22} />
+            </a>
           </div>
         </div>
       </header>
