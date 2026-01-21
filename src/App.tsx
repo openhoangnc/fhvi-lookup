@@ -693,7 +693,7 @@ const App: React.FC = () => {
                   selectedHospital.geo.latitude !== 0 &&
                   selectedHospital.geo.longitude !== 0 && (
                     <a
-                      href={`https://www.google.com/maps/search/?q=${selectedHospital.name}, ${selectedHospital.address}, ${selectedHospital.district}, ${selectedHospital.city}, ${selectedHospital.countryName}`}
+                      href={`https://www.google.com/maps/search/?api=1&query=${selectedHospital.name}, ${selectedHospital.address}, ${selectedHospital.district}, ${selectedHospital.city}, ${selectedHospital.countryName}`}
                       target="_blank"
                       rel="noreferrer"
                       style={{
