@@ -13,16 +13,45 @@ import { Search, X, Info, Sun, Moon, RotateCcw, Github } from "lucide-react";
 import "./App.css";
 
 const App: React.FC = () => {
-  const [searchQuery, setSearchQuery] = useState("");
-  const [selectedCountry, setSelectedCountry] = useState<string>("");
-  const [selectedCity, setSelectedCity] = useState<string>("");
-  const [selectedDistrict, setSelectedDistrict] = useState<string>("");
-  const [selectedCategory, setSelectedCategory] = useState<string>("");
-  const [selectedServiceId, setSelectedServiceId] = useState<number | "">("");
-  const [selectedWorkDay, setSelectedWorkDay] = useState<number | "">("");
-  const [selectedWorkHour, setSelectedWorkHour] = useState<number | "">("");
+  const initialParams = useMemo(() => {
+    return new URLSearchParams(window.location.search);
+  }, []);
+
+  const [searchQuery, setSearchQuery] = useState(initialParams.get("q") || "");
+  const [selectedCountry, setSelectedCountry] = useState<string>(
+    initialParams.get("country") || "",
+  );
+  const [selectedCity, setSelectedCity] = useState<string>(
+    initialParams.get("city") || "",
+  );
+  const [selectedDistrict, setSelectedDistrict] = useState<string>(
+    initialParams.get("district") || "",
+  );
+  const [selectedCategory, setSelectedCategory] = useState<string>(
+    initialParams.get("category") || "",
+  );
+  const [selectedServiceId, setSelectedServiceId] = useState<number | "">(
+    () => {
+      const val = initialParams.get("service");
+      return val && val !== "" ? Number(val) : "";
+    },
+  );
+  const [selectedWorkDay, setSelectedWorkDay] = useState<number | "">(() => {
+    const val = initialParams.get("day");
+    return val !== null && val !== "" ? Number(val) : "";
+  });
+  const [selectedWorkHour, setSelectedWorkHour] = useState<number | "">(() => {
+    const val = initialParams.get("hour");
+    return val !== null && val !== "" ? Number(val) : "";
+  });
   const [selectedHospital, setSelectedHospital] = useState<Hospital | null>(
-    null,
+    () => {
+      const id = initialParams.get("id");
+      if (id) {
+        return (rawData as HospitalData).data.find((h) => h.id === id) || null;
+      }
+      return null;
+    },
   );
   const [theme, setTheme] = useState<"light" | "dark">(
     () => (localStorage.getItem("theme") as "light" | "dark") || "light",
@@ -32,14 +61,52 @@ const App: React.FC = () => {
     longitude: number;
   } | null>(null);
   const [selectedMaxDistance, setSelectedMaxDistance] = useState<number | "">(
-    "",
+    () => {
+      const val = initialParams.get("dist");
+      return val && val !== "" ? Number(val) : "";
+    },
   );
-  const [language, setLanguage] = useState<Language>("vi");
+  const [language, setLanguage] = useState<Language>(() => {
+    const val = initialParams.get("lang");
+    return val === "en" || val === "vi" ? (val as Language) : "vi";
+  });
 
   React.useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
     localStorage.setItem("theme", theme);
   }, [theme]);
+
+  React.useEffect(() => {
+    const params = new URLSearchParams();
+    if (searchQuery) params.set("q", searchQuery);
+    if (selectedCountry) params.set("country", selectedCountry);
+    if (selectedCity) params.set("city", selectedCity);
+    if (selectedDistrict) params.set("district", selectedDistrict);
+    if (selectedCategory) params.set("category", selectedCategory);
+    if (selectedServiceId !== "")
+      params.set("service", String(selectedServiceId));
+    if (selectedWorkDay !== "") params.set("day", String(selectedWorkDay));
+    if (selectedWorkHour !== "") params.set("hour", String(selectedWorkHour));
+    if (selectedMaxDistance !== "")
+      params.set("dist", String(selectedMaxDistance));
+    if (selectedHospital) params.set("id", selectedHospital.id);
+    if (language !== "vi") params.set("lang", language);
+
+    const newUrl = `${window.location.pathname}?${params.toString()}`;
+    window.history.replaceState(null, "", newUrl);
+  }, [
+    searchQuery,
+    selectedCountry,
+    selectedCity,
+    selectedDistrict,
+    selectedCategory,
+    selectedServiceId,
+    selectedWorkDay,
+    selectedWorkHour,
+    selectedMaxDistance,
+    selectedHospital,
+    language,
+  ]);
 
   const toggleLanguage = () => {
     setLanguage((prev) => (prev === "vi" ? "en" : "vi"));
@@ -64,6 +131,14 @@ const App: React.FC = () => {
       console.error("Geolocation is not supported by this browser.");
     }
   };
+
+  // Trigger location request if distance filter is active from URL but location is missing
+  React.useEffect(() => {
+    if (selectedMaxDistance && !userLocation) {
+      requestLocation();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedMaxDistance]);
 
   const toggleTheme = () => {
     setTheme((prev) => (prev === "light" ? "dark" : "light"));
