@@ -9,11 +9,13 @@ A modern, responsive hospital lookup application built with React and TypeScript
 ## ✨ Features
 
 - **🔍 Smart Search** - Search hospitals by name, address, phone number, or services
+- **🌐 Multi-Language Support** - Toggle between English and Vietnamese interfaces
+- **📏 Distance Filter** - Find hospitals near you with geolocation support
 - **📍 Location Filtering** - Filter by country, city, and district with hierarchical selection
 - **🏥 Category & Service Filters** - Filter by hospital category and available services
 - **⏰ Working Hours Filter** - Find hospitals open on specific days and hours
 - **🌓 Dark/Light Theme** - Toggle between dark and light modes
-- **📱 Responsive Design** - Mobile-friendly, macOS/iOS-style interface
+- **📱 Responsive Design** - Mobile-friendly, macOS/iOS-style interface with Scroll to Top
 - **🗺️ Map Integration** - View hospital locations on map
 - **📞 Quick Actions** - One-tap calling and directions
 
@@ -28,7 +30,7 @@ A modern, responsive hospital lookup application built with React and TypeScript
 
 ```bash
 # Clone the repository
-git clone <repository-url>
+git clone https://github.com/openhoangnc/fhvi-lookup.git
 cd fhvi-lookup
 
 # Install dependencies
@@ -98,10 +100,11 @@ Full-text search across multiple fields including:
 - Available services
 
 ### Filtering
-Hierarchical location filtering:
-1. Select Country → Available cities update
-2. Select City → Available districts update
-3. Filter by category, service, or working hours
+Powerful filtering options:
+1. **Location**: Hierarchical selection (Country → City → District)
+2. **Distance**: Filter hospitals by radius from your current location
+3. **Advanced**: Filter by category, service, or specific working hours
+4. **Clear Filters**: One-click reset to view all results
 
 ### Theme Support
 - Default light theme
@@ -118,4 +121,4 @@ Hierarchical location filtering:
 
 ## 📄 License
 
-Private project.
+Distributed under the MIT License. See [LICENSE](LICENSE) for more information.
