@@ -266,9 +266,23 @@ const App: React.FC = () => {
                 objectFit: "cover",
               }}
             />
-            <h1 className="sf-bold" style={{ fontSize: "24px", margin: 0 }}>
-              {t("appTitle", language)}
-            </h1>
+            <div style={{ display: "flex", flexDirection: "column" }}>
+              <h1
+                className="sf-bold"
+                style={{ fontSize: "24px", margin: 0, lineHeight: 1 }}
+              >
+                {t("appTitle", language)}
+              </h1>
+              <span
+                style={{
+                  fontSize: "11px",
+                  color: "var(--label-secondary)",
+                  marginTop: "2px",
+                }}
+              >
+                {t("dataUpdated", language)}: 21/01/2026
+              </span>
+            </div>
           </div>
           <div style={{ display: "flex", gap: "8px" }}>
             <button

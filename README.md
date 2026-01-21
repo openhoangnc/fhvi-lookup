@@ -90,6 +90,8 @@ The application uses hospital data with the following key fields:
 - **Schedule**: workHours[] with operation hours and days
 - **Network**: isSTP, fHVINetwork, preferredClinic
 
+> **Note**: Data updated on 21/01/2026.
+
 ## 🎨 Features in Detail
 
 ### Search
