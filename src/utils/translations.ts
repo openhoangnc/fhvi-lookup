@@ -70,6 +70,7 @@ export const TRANSLATIONS = {
     sunShort: "CN",
     dataUpdated: "Dữ liệu cập nhật ngày",
     openSource: "Mã nguồn mở",
+    verifyProvider: "Tra cứu nhà cung cấp",
   },
   en: {
     appTitle: "FHVI Medical Providers",
@@ -125,6 +126,7 @@ export const TRANSLATIONS = {
     sunShort: "Sun",
     dataUpdated: "Data updated",
     openSource: "Open Source",
+    verifyProvider: "Verify Provider",
   },
 };
 

@@ -750,6 +750,21 @@ const App: React.FC = () => {
                     🌐 {selectedHospital.website}
                   </a>
                 )}
+                <a
+                  href={`https://public-provider.fullertonhealth.com.vn/?name=${encodeURIComponent(
+                    selectedHospital.name,
+                  )}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  style={{
+                    display: "block",
+                    color: "var(--system-blue)",
+                    textDecoration: "none",
+                    marginTop: "4px",
+                  }}
+                >
+                  🛡️ {t("verifyProvider", language)}
+                </a>
               </section>
 
               {/* Network Status */}
