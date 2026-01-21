@@ -61,10 +61,7 @@ const App: React.FC = () => {
     longitude: number;
   } | null>(null);
   const [selectedMaxDistance, setSelectedMaxDistance] = useState<number | "">(
-    () => {
-      const val = initialParams.get("dist");
-      return val && val !== "" ? Number(val) : "";
-    },
+    "",
   );
   const [language, setLanguage] = useState<Language>(() => {
     const val = initialParams.get("lang");
@@ -87,12 +84,14 @@ const App: React.FC = () => {
       params.set("service", String(selectedServiceId));
     if (selectedWorkDay !== "") params.set("day", String(selectedWorkDay));
     if (selectedWorkHour !== "") params.set("hour", String(selectedWorkHour));
-    if (selectedMaxDistance !== "")
-      params.set("dist", String(selectedMaxDistance));
+
     if (selectedHospital) params.set("id", selectedHospital.id);
     if (language !== "vi") params.set("lang", language);
 
-    const newUrl = `${window.location.pathname}?${params.toString()}`;
+    const paramsString = params.toString();
+    const newUrl = paramsString
+      ? `${window.location.pathname}?${paramsString}`
+      : window.location.pathname;
     window.history.replaceState(null, "", newUrl);
   }, [
     searchQuery,
@@ -103,7 +102,7 @@ const App: React.FC = () => {
     selectedServiceId,
     selectedWorkDay,
     selectedWorkHour,
-    selectedMaxDistance,
+
     selectedHospital,
     language,
   ]);
