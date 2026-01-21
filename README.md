@@ -6,6 +6,10 @@ A modern, responsive hospital lookup application built with React and TypeScript
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.9-3178C6?logo=typescript&logoColor=white)
 ![Vite](https://img.shields.io/badge/Vite-7.2-646CFF?logo=vite&logoColor=white)
 
+## 💡 Motivation
+
+This project was developed because the existing Fullerton Health provider search tool is limited and lacks essential filtering capabilities. This application aims to solve that by providing a faster, more intuitive interface with powerful filtering options (location, distance, working hours, services), making it easier for users to find the care they need.
+
 ## ✨ Features
 
 - **🔍 Smart Search** - Search hospitals by name, address, phone number, or services
