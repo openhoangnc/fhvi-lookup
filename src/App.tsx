@@ -1,4 +1,5 @@
 import React, { useState, useMemo } from "react";
+import { Analytics } from "@vercel/analytics/react";
 import rawData from "./data/fhvi.json";
 import type { Hospital, HospitalData } from "./types/hospital";
 import HospitalCard from "./components/HospitalCard";
@@ -913,6 +914,7 @@ const App: React.FC = () => {
         </div>
       )}
       <ScrollToTopButton />
+      <Analytics />
     </div>
   );
 };
